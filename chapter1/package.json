@@ -1,0 +1,14 @@
+{
+  "name": "framework-showcase",
+  "version": "1.0.0",
+  "description": "Framework Showcase",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^8.2.5"
+  }
+}
