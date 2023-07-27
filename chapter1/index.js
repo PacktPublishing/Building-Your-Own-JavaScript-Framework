@@ -29,7 +29,7 @@ const answer = await select({
         },
         {
             name: 'Nest.js',
-            value: 'nest',
+            value: 'nest2',
             description: "Progressive Node.js framework for building efficient, reliable and scalable server-side applications"
         },
         new Separator(),
