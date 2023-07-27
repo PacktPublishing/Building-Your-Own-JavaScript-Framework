@@ -17,11 +17,17 @@ The chapters are linked below and have their own README files to guide you throu
 * [Chapter 9](./chapter9)
 * [Chapter 10](./chapter10)
 
-## Environment
+## Software Requirements
 
-* Make sure you have [Node.js](https://nodejs.org) version 20+ installed.
-* Using the [nvm](https://github.com/nvm-sh/nvm) can help with the Node.js version management on your machine.
-* To explore the front-end applications, please use a modern browser like Chrome or a Chrome-like browser.
+* Operating System: For the code from the repository you can use any environment that supports a terminal and running Node.js, i.e. Windows, Mac OS, and most varieties of Linux.
+* Runtime: Make sure you have [Node.js](https://nodejs.org) version 20+ installed. Using the [nvm](https://github.com/nvm-sh/nvm) can help with the Node.js version management on your machine.
+* Web Browsers: To explore the front-end applications, please use a modern browser like Chrome or a Chrome-like browser.
+
+## Hardware Requirements
+
+* Processor: Any modern multi-core processor (1 GHz or faster).
+* RAM: Minimum 512 MB of memory.
+* Storage: The Node.js runtime itself takes less than 100 MB space. However, depending upon the size of your project and the number of dependencies, you might need more. It is recommended to allocate about 10 GBs to accommodate for dependencies in the chapters.
 
 ## Issues and Requests
 

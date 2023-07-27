@@ -1,6 +1,6 @@
 # Chapter 2
 
-## Content
+## Contents
 
 * [Nest.js Application](nest-js-application) - an example of a Nest.js application.
 * [hapi.js modules](hapi-libs) - showcase of the Hapi.js codebase.

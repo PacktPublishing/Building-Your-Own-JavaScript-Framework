@@ -4,11 +4,12 @@
   "description": "Framework Showcase",
   "main": "index.js",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
   "license": "MIT",
   "dependencies": {
-    "inquirer": "^8.2.5"
+    "@inquirer/select": "^1.2.5"
   }
 }
