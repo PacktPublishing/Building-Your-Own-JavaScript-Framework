@@ -1,0 +1,17 @@
+{
+  "name": "esbuild",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node serve.js"
+  },
+  "type": "module",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "create-serve": "^1.0.1",
+    "esbuild": "^0.18.17"
+  }
+}
