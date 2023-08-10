@@ -7,7 +7,7 @@
 import fs from "fs";
 import path from "path";
 import makeDebug from "debug";
-import { makeExecutableSchema, mergeSchemas } from "@graphql-tools/schema";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 
 const debug = makeDebug("componium:file-router");
 
@@ -19,12 +19,10 @@ const debug = makeDebug("componium:file-router");
  * @returns {object} - GraphQL schemas
  */
 const fileRoutes = async (dir, app, gql) => {
-
   let schemas = [];
 
   // Recursive function to load routes
   const fileRoutesInternal = async (dir, app, gql) => {
-
     let files = [];
     const root = dir;
     try {
@@ -34,7 +32,6 @@ const fileRoutes = async (dir, app, gql) => {
     }
 
     for (let file of files) {
-
       // Build file path
       const filePath = path.join(root, file);
 
@@ -44,12 +41,11 @@ const fileRoutes = async (dir, app, gql) => {
       if (stat.isDirectory()) {
         // Recursively process subdirectories
         await fileRoutesInternal(filePath, app, gql);
-
       } else if (stat.isFile() && path.extname(filePath) === ".js") {
-
         // Build route path from file path
         const pathArray = filePath.split(path.sep);
-        const routePath = "/" + pathArray.slice(pathArray.indexOf("routes") + 1, -1).join("/");
+        const routePath =
+          "/" + pathArray.slice(pathArray.indexOf("routes") + 1, -1).join("/");
 
         // Get route name and type from filename
         const fileBlocks = path.basename(filePath).split(".");
@@ -62,7 +58,8 @@ const fileRoutes = async (dir, app, gql) => {
         debug(`Registering ${fileType.toUpperCase()} ${routePath} `);
 
         // Build API path from route path and name
-        let apiPath = routePath === "/" ? "/" + routeName : routePath + "/" + routeName;
+        let apiPath =
+          routePath === "/" ? "/" + routeName : routePath + "/" + routeName;
 
         // Register route based on file type
         if (fileType === "js" && routeName === "_index") {

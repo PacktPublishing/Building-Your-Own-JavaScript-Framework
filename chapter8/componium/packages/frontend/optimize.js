@@ -28,6 +28,7 @@ class Optimize {
    * @return {void}
    */
   async minifyScripts() {
+    debug("Minify scripts running...");
     // Source directory containing original components.
     const srcDir = join(process.cwd(), "components");
     // Destination directory to store minified components.
