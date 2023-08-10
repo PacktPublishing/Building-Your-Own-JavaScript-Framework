@@ -19,8 +19,6 @@
 
 ## Release History
 
-See the [CHANGELOG](CHANGELOG.md).
-
 ## License
 
 [MIT](LICENSE)

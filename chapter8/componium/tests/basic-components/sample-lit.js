@@ -18,20 +18,24 @@ export class YearComponent extends LitElement {
   }
 }
 
-import {html, css, LitElement} from 'lit';
 export class YearComponent extends LitElement {
-    static styles = css`p { color: green }`;
-
-    static properties = {
-        year: {type: Number},
-    };
-
-    constructor() {
-        super();
-        this.year = 2024;
+  static styles = css`
+    p {
+      color: green;
     }
+  `;
 
-    render() {
-        return html`<button id="addYears">Add Years</button>
+  static properties = {
+    year: { type: Number },
+  };
+
+  constructor() {
+    super();
+    this.year = 2024;
+  }
+
+  render() {
+    return html` <button id="addYears">Add Years</button>
       <div id="yearCount">Year: ${this.year}</div>`;
+  }
 }
