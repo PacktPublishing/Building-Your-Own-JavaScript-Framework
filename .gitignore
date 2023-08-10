@@ -103,3 +103,4 @@ dist
 .tern-port
 
 .output
+.DS_store
