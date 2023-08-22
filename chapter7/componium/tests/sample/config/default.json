@@ -1,5 +1,5 @@
 {
   "database": {
-    "connection_uri": "sqlite::memory"
+    "connection_uri": "sqlite://:memory:"
   }
 }

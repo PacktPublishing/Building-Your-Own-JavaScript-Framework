@@ -1,6 +1,19 @@
 import chokidar from "chokidar";
 import { spawn } from "node:child_process";
 import select from "@inquirer/select";
+import { fileURLToPath } from "url";
+import fs from "fs/promises";
+import path, { dirname } from "path";
+import { exec } from "child_process";
+
+// `makeDebug` is a function from the "debug" package for creating a debugger instance.
+import makeDebug from "debug";
+
+// Creating a debug instance specifically for "componium:frontend-client-view".
+const debug = makeDebug("componium:commands");
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Variable to store the server process instance
 let server;
@@ -16,12 +29,12 @@ function restartServer() {
   }
 
   // Start a new server process
-  server = spawn("node", ["app.js"], { stdio: "inherit" });
+  server = spawn("node", ["--no-deprecation", "app.js"], { stdio: "inherit" });
 
   // Event listener for when the server process closes
   server.on("close", function (code, signal) {
     if (signal) {
-      console.log(`Server process was killed with signal ${signal}`);
+      debug(`Server process was killed with signal ${signal}`);
     } else if (code !== null) {
       console.log(`Server process exited with code ${code}`);
     } else {
@@ -45,6 +58,70 @@ function restartDev() {
     .on("all", (event, path) => {
       restartServer();
     });
+}
+
+/**
+ * Initialize app directory from template
+ */
+async function initDev() {
+  const templateDir = path.join(__dirname, "..", "template", "_app");
+  const currentDir = process.cwd();
+
+  try {
+    const currentDirContents = await fs.readdir(currentDir);
+    if (currentDirContents.length > 0) {
+      console.log(
+        "Warning: New application directory not empty. New files will be added to existing ones."
+      );
+    }
+
+    await copyDirectoryRecursive(templateDir, currentDir);
+    // Install npm dependencies
+    await installDependencies();
+
+    console.log(
+      "New Componium application initialized. Run `componium dev` to start the new app!"
+    );
+  } catch (error) {
+    console.error("An error occurred:", error.message);
+  }
+}
+
+async function copyDirectoryRecursive(source, target) {
+  const files = await fs.readdir(source);
+
+  for (const file of files) {
+    const sourcePath = path.join(source, file);
+    const destPath = path.join(target, file);
+
+    const stat = await fs.stat(sourcePath);
+    console.log(`Creating ${destPath}...`);
+
+    if (stat.isDirectory()) {
+      try {
+        await fs.mkdir(destPath);
+      } catch (e) {}
+      await copyDirectoryRecursive(sourcePath, destPath);
+    } else {
+      await fs.copyFile(sourcePath, destPath);
+    }
+  }
+}
+
+function installDependencies() {
+  return new Promise((resolve, reject) => {
+    console.log("Installing dependencies...");
+
+    exec("npm install", (error, stdout, stderr) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        reject(error);
+        return;
+      }
+
+      resolve();
+    });
+  });
 }
 
 /**
@@ -76,4 +153,4 @@ async function create() {
 }
 
 // Export the functions for external use
-export { restartDev, create };
+export { restartDev, create, initDev };

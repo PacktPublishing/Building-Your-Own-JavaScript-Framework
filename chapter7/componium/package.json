@@ -1,6 +1,6 @@
 {
   "name": "componium",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Componium Framework",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -32,7 +32,7 @@
     "inquirer": "^9.2.7",
     "lit": "^2.7.5",
     "lit-html": "^2.7.4",
-    "sequelize": "^6.32.0",
+    "sequelize": "^6.32.1",
     "winston": "^3.9.0",
     "yargs": "^17.7.2"
   },

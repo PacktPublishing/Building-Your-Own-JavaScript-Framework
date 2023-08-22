@@ -11,7 +11,7 @@ class Database {
    * Uses a configuration-defined connection string or defaults to an in-memory SQLite database.
    */
   constructor() {
-    const dbConfig = config.get("databaseConnection") || "sqlite::memory:";
+    const dbConfig = config.get("database.connection_uri") || "sqlite::memory:";
     this.db = new Sequelize(dbConfig);
   }
 

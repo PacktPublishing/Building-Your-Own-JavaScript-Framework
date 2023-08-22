@@ -50,7 +50,9 @@ class Server {
     const httpServer = http.createServer(app);
     // Start listening
     app.listen(this.port);
-    debug(`Componium Server on port ${this.port}`);
+    console.log(
+      `Componium Server (PID: ${process.pid}) started on port: ${this.port}`
+    );
     // Load routes
     const result = await fileRoutes(
       path.join(cwd(), this.routesRootDir),
@@ -64,24 +66,42 @@ class Server {
     }
     // Additional framework routes...
     const frameworkPaths = {
-      "/_framework/lit-element-hydrate-support.js": ["@lit-labs", "ssr-client", "lit-element-hydrate-support.js"],
+      "/_framework/lit-element-hydrate-support.js": [
+        "@lit-labs",
+        "ssr-client",
+        "lit-element-hydrate-support.js",
+      ],
       "/_framework/lit.js": ["lit", "index.js"],
       "/_framework/lit-html.js": ["lit-html", "lit-html.js"],
-      "/_framework/lit-reactive-element.js": ["@lit", "reactive-element", "reactive-element.js"],
+      "/_framework/lit-reactive-element.js": [
+        "@lit",
+        "reactive-element",
+        "reactive-element.js",
+      ],
       "/_framework/lit-element.js": ["lit-element", "lit-element.js"],
       "/_framework/lit-html/is-server.js": ["lit-html", "is-server.js"],
       "/_framework/css-tag.js": ["@lit", "reactive-element", "css-tag.js"],
-      "/_framework/lib/hydrate-lit-html.js": ["@lit-labs", "ssr-client", "lib", "hydrate-lit-html.js"],
-      "/_framework/private-ssr-support.js": ["lit-html", "private-ssr-support.js"],
+      "/_framework/lib/hydrate-lit-html.js": [
+        "@lit-labs",
+        "ssr-client",
+        "lib",
+        "hydrate-lit-html.js",
+      ],
+      "/_framework/private-ssr-support.js": [
+        "lit-html",
+        "private-ssr-support.js",
+      ],
       "/_framework/directive.js": ["lit-html", "directive.js"],
       "/_framework/directive-helpers.js": ["lit-html", "directive-helpers.js"],
       "/_framework/componium.js": ["..", "frontend", "componium.js"],
-      "/_framework/router.js": ["..", "frontend", "router.js"]
+      "/_framework/router.js": ["..", "frontend", "router.js"],
     };
 
     for (let [route, segments] of Object.entries(frameworkPaths)) {
       app.get(route, (request, response) => {
-        response.sendFile(path.join(__dirname, "..", "..", "node_modules", ...segments));
+        response.sendFile(
+          path.join(__dirname, "..", "..", "node_modules", ...segments)
+        );
       });
     }
 
