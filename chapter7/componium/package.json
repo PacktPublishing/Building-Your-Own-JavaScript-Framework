@@ -17,7 +17,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@apollo/server": "^4.7.1",
+    "@apollo/server": "^4.9.1",
     "@changesets/cli": "^2.26.2",
     "@graphql-tools/schema": "^10.0.0",
     "@inquirer/select": "^1.2.1",
