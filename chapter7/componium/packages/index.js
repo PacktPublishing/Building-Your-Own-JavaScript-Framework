@@ -2,10 +2,10 @@
 import process from "node:process"; // Built-in node module to access process-level information.
 
 // Importing application-specific modules
-import Logger from "./app/logger.js";         // Custom logger for the application.
-import { Server } from "./server/server.js";  // Server class for creating and managing the server instance.
+import Logger from "./app/logger.js"; // Custom logger for the application.
+import { Server } from "./server/server.js"; // Server class for creating and managing the server instance.
 import { Optimize } from "./frontend/optimize.js"; // Class to optimize front-end components.
-import Database from "./db/index.js";         // Database class to handle database operations.
+import Database from "./db/index.js"; // Database class to handle database operations.
 
 /**
  * Main ComponiumApp class to set up and manage the application.
@@ -17,8 +17,7 @@ class ComponiumApp {
    * Additionally, it optimizes front-end component files if the node environment is set to production.
    */
   constructor() {
-    global.componium = {};         // Creating a global object to hold application-level data.
-    componium.models = [];         // Setting up an empty models array.
+    global.componium = {}; // Creating a global object to hold application-level data.
 
     // Optimize front-end component files if the environment is production.
     if (process.env.NODE_ENV === "production") {
@@ -34,9 +33,9 @@ class ComponiumApp {
    */
   async initialize() {
     componium.logger = new Logger(); // Initializing logger
-    this.db = new Database();        // Setting up the database.
-    await this.db.authenticate();    // Authenticating with the database.
-    componium.db = this.db;          // Assigning the database instance to the global object.
+    this.db = new Database(); // Setting up the database.
+    await this.db.authenticate(); // Authenticating with the database.
+    componium.db = this.db; // Assigning the database instance to the global object.
 
     return this;
   }

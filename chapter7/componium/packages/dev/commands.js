@@ -1,5 +1,6 @@
 import chokidar from "chokidar";
 import { spawn } from "node:child_process";
+import input from "@inquirer/input";
 import select from "@inquirer/select";
 import { fileURLToPath } from "url";
 import fs from "fs/promises";
@@ -80,7 +81,7 @@ async function initDev() {
     await installDependencies();
 
     console.log(
-      "New Componium application initialized. Run `componium dev` to start the new app!"
+      "New Componium application initialized. Run `componium dev` to start the new app or `componium create` to scaffold!"
     );
   } catch (error) {
     console.error("An error occurred:", error.message);
@@ -99,7 +100,7 @@ async function copyDirectoryRecursive(source, target) {
 
     if (stat.isDirectory()) {
       try {
-        await fs.mkdir(destPath);
+        await fs.mkdir(destPath, { recursive: true });
       } catch (e) {}
       await copyDirectoryRecursive(sourcePath, destPath);
     } else {
@@ -129,7 +130,7 @@ function installDependencies() {
  * then performs corresponding actions.
  */
 async function create() {
-  const answer = await select({
+  const componentTemplate = await select({
     message: "What would you like to scaffold?",
     choices: [
       {
@@ -146,10 +147,55 @@ async function create() {
         name: "GraphQL Schema",
         value: "gql",
       },
+      {
+        name: "Client View",
+        value: "clientview",
+      },
     ],
   });
 
-  // Further implementation can be added here
+  const name = await input({
+    message: `Enter a name for your ${componentTemplate.toUpperCase()}`,
+  });
+
+  const templateDir = path.join(
+    __dirname,
+    "..",
+    "template",
+    "_create",
+    `${componentTemplate}.js`
+  );
+  const sourcePath = path.resolve(templateDir);
+  const currentDir = process.cwd();
+
+  let destDir = path.join(currentDir, "models");
+  switch (componentTemplate) {
+    case "gql":
+      destDir = path.join(currentDir, "routes", "gql");
+      break;
+    case "route":
+      destDir = path.join(currentDir, "routes", "api");
+      break;
+    case "clientview":
+      destDir = path.join(currentDir, "views");
+      break;
+  }
+
+  try {
+    await fs.mkdir(destDir, { recursive: true });
+  } catch (e) {
+    throw new Error(e);
+  }
+
+  const destPath = path.resolve(path.join(destDir, `${toSnakeCase(name)}.js`));
+  await fs.copyFile(sourcePath, destPath);
+}
+
+function toSnakeCase(str) {
+  return str
+    .replace(/[\s_]+/g, "_")
+    .replace(/([a-z\d_])([A-Z])/g, "$1_$2")
+    .toLowerCase();
 }
 
 // Export the functions for external use

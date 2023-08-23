@@ -12,7 +12,7 @@ class Database {
    */
   constructor() {
     const dbConfig = config.get("database.connection_uri") || "sqlite::memory:";
-    this.db = new Sequelize(dbConfig);
+    this.sequelize = new Sequelize(dbConfig);
   }
 
   /**
@@ -20,7 +20,7 @@ class Database {
    * @throws {Error} Throws an error if the authentication fails.
    */
   async authenticate() {
-    await this.db.authenticate();
+    await this.sequelize.authenticate();
   }
 }
 

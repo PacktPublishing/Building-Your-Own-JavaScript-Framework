@@ -1,22 +1,19 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes } from "sequelize";
 
-class Package extends Model {}
+export default async function () {
+  const sequelize = componium.db.sequelize;
 
-Package.init(
-  {
-    title: DataTypes.STRING,
-    address: DataTypes.STRING,
-    created: DataTypes.DATE,
-  },
-  { sequelize: componium.db, modelName: "user" }
-);
+  const Package = sequelize.define(
+    "Package",
+    {
+      title: DataTypes.STRING,
+      address: DataTypes.STRING,
+      created: DataTypes.DATE,
+    },
+    {}
+  );
 
-(async () => {
-  await this.db.sync();
-  const jane = await Package.create({
-    title: "Paper Delivery",
-    address: "123 Main St.",
-    created: new Date(2023, 1, 1),
-  });
-  console.log(jane.toJSON());
-})();
+  await sequelize.sync();
+
+  return Package;
+}
