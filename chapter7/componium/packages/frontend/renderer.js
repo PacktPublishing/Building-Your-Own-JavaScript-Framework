@@ -62,8 +62,16 @@ class Renderer {
           <script type="importmap">
             {
               "imports": {
-                /* Define the import map for modules to provide URL mappings. */
-                ... // [list of import mappings]
+                "componium": "/_framework/componium.js",
+                "lit": "/_framework/lit.js",
+                "lit-html": "/_framework/lit-html.js",
+                "hydrate-lit-html": "/_framework/lib/lit-html.js",
+                "lit-html/private-ssr-support.js": "/_framework/private-ssr-support.js",
+                "lit-html/directive.js": "/_framework/directive.js",
+                "lit-html/directive-helpers.js": "/_framework/directive-helpers.js",
+                "@lit/reactive-element": "/_framework/lit-reactive-element.js",
+                "lit-element/lit-element.js": "/_framework/lit-element.js",
+                "lit-html/is-server.js": "/_framework/lit-html/is-server.js"
               }
             }
           </script>

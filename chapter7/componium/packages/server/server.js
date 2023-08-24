@@ -93,8 +93,6 @@ class Server {
       ],
       "/_framework/directive.js": ["lit-html", "directive.js"],
       "/_framework/directive-helpers.js": ["lit-html", "directive-helpers.js"],
-      "/_framework/componium.js": ["..", "frontend", "componium.js"],
-      "/_framework/router.js": ["..", "frontend", "router.js"],
     };
 
     for (let [route, segments] of Object.entries(frameworkPaths)) {
@@ -102,6 +100,17 @@ class Server {
         response.sendFile(
           path.join(__dirname, "..", "..", "node_modules", ...segments)
         );
+      });
+    }
+
+    const localFrameworkPaths = {
+      "/_framework/componium.js": ["..", "frontend", "componium.js"],
+      "/_framework/router.js": ["..", "frontend", "router.js"],
+    };
+
+    for (let [route, segments] of Object.entries(localFrameworkPaths)) {
+      app.get(route, (request, response) => {
+        response.sendFile(path.join(__dirname, ...segments));
       });
     }
 
