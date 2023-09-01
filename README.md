@@ -13,7 +13,7 @@ The chapters are linked below and have their own README files to guide you throu
 * [Chapter 5](./chapter5)
 * [Chapter 6](./chapter6)
 * [Chapter 7](./chapter7)
-* [Chapter 8](./chapter8)
+* Chapter 8 - uses the code from Chapter 7.
 * [Chapter 9](./chapter9)
 * [Chapter 10](./chapter10)
 
