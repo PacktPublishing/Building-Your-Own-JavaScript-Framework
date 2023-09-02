@@ -1,5 +1,9 @@
 # Chapter 5
 
+## Interactive script
+
+In this directory run `npm install` and then `npm start` to quickly get started with the examples from this chapter.
+
 ## Contents
 
 * [Utilizing libraries with Angular and RxJS](./angular-rxjs)

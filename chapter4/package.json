@@ -1,7 +1,7 @@
 {
-  "name": "chapter5",
+  "name": "framework-quality",
   "version": "1.0.0",
-  "description": "Chapter 5",
+  "description": "Chapter 4",
   "main": "index.js",
   "private": true,
   "type": "module",
