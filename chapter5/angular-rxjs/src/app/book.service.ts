@@ -1,46 +1,20 @@
-// Required Angular core and RxJS imports.
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-
+// Importing essential Angular and RxJS modules
+import { Injectable } from '@angular/core'; // Injectable decorator to make this class injectable
+import { HttpClient } from '@angular/common/http'; // HttpClient to make API requests
+import { Observable } from 'rxjs'; // Observable from RxJS to handle asynchronous operations
+// Injectable decorator to make this service class injectable throughout the Angular application
 @Injectable({
-    providedIn: 'root' // This service should be created by the root application injector.
+  providedIn: 'root',
 })
 export class BookService {
+  private baseUrl = 'https://api.open-meteo.com/v1/forecast';
 
-    // The API url from which the HttpClient will be fetching data.
-    private apiUrl = 'https://api.packt.com/api/v1/test'; // Replace with your API url
+  constructor(private httpClient: HttpClient) {}
 
-    // Injecting HttpClient into the service via the constructor.
-    constructor(private http: HttpClient) { }
-
-    // A method to get data from the API. This returns an Observable.
-    getData(): Observable<any> {
-        // HttpClient.get returns an Observable, to which we can attach retry and error handling logic.
-        return this.http.get(this.apiUrl)
-            .pipe(
-                // If the request fails, retry it once.
-                retry(3),
-                // Handle errors from the API call.
-                catchError(this.handleError)
-            )
-    }
-
-    // A private error handling method.
-    private handleError(error: HttpErrorResponse) {
-        // Distinguish between client-side and server-side errors.
-        if (error.error instanceof ErrorEvent) {
-            // A client-side or network error occurred.
-            console.error('An error occurred:', error.error.message);
-        } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong.
-            console.error(
-                `Backend returned code ${error.status}, ` +
-                `body was: ${error.error}`);
-        }
-        // Return an observable with a user-facing error message.
-        return throwError('Something bad happened; please try again later.');
-    }
+  // Method to fetch weather data based on latitude and longitude
+  // It returns an Observable that will contain the API response
+  getWeather(latitude: number, longitude: number): Observable<any> {
+    const url = `${this.baseUrl}?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+    return this.httpClient.get(url);
+  }
 }

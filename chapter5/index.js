@@ -1,21 +1,20 @@
 import select from "@inquirer/select";
 import { execSync } from "child_process";
 
-console.log("Welcome to Chapter 4!");
+console.log("Welcome to Chapter 5!");
 
 const answer = await select({
   message: "Select the demo to run:",
   choices: [
     {
-      name: "Next.js with Tailwind CSS",
-      value: "next-example-app",
-      description: "Example of using Tailwind CSS with the Next.js framework",
+      name: "Angular with RxJS",
+      value: "angular-rxjs",
+      description: "Utilizing the RxJS library in Angular",
     },
     {
-      name: "Practical Docus.dev example",
-      value: "practical-docus",
-      description:
-        "Practical sample of using Docus to enhance the quality of documentation in framework projects",
+      name: "esbuild tooling",
+      value: "esbuild",
+      description: "Build tooling and compilers",
     },
   ],
 });

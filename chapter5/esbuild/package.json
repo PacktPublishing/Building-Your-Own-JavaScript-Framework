@@ -4,6 +4,7 @@
   "description": "",
   "main": "build.js",
   "scripts": {
+    "dev": "node build.js && node serve.js",
     "build": "node build.js",
     "start": "node serve.js"
   },
