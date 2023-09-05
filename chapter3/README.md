@@ -2,7 +2,7 @@
 
 ## Interactive script
 
-In this directory run `npm install` to fetch the framework artifacts. The script will unpack the framework examples into this directory.
+In this directory run `npm install` to fetch the framework artifacts. The script will unpack the framework examples into this directory. Running `npm start` to quickly get started with the Next.js example from this chapter.
 
 ## Unpacked contents
 

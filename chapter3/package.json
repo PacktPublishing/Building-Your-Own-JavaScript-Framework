@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "postinstall": "node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "MIT",
