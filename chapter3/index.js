@@ -10,12 +10,14 @@ const sources = {
 
 console.log("Welcome to Chapter 3! \n");
 
-console.log("Extracting sources...");
+console.log("Extracting packaged framework sources...");
 Object.keys(sources).forEach((key) => {
   fs.cpSync(key, sources[key], { recursive: true });
 });
 
-console.log("Done!");
+console.log(
+  "Done! You can view the sources in this directory using your code editor..."
+);
 
 const answer = await select({
   message: "Select the demo to run:",
