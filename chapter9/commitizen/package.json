@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npm run test",
     "test": "echo 'fix(framework): fix endpoint testing, > modify this message to test commitlint <' | commitlint"
   },
   "keywords": [],

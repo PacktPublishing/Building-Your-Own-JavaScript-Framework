@@ -1,5 +1,9 @@
 # Chapter 9
 
+## Interactive script
+
+In this directory run `npm install` and then `npm start` to quickly get started with the examples from this chapter.
+
 ## Contents
 
 * `commitizen` consists of a project uses the [Commitizen](https://github.com/commitizen/cz-cli) package for enforcing git commit template.

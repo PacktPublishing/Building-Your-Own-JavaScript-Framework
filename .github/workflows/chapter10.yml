@@ -37,4 +37,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       # This step runs `npm ci` to install any dependencies listed in your `package.json` file.
-      - run: cd adonisjs && npm ci
+      - run: cd adonisjs && npm ci && npm run build
