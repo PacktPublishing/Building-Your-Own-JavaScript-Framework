@@ -53,7 +53,7 @@ const fileRoutes = async (dir, app, gql) => {
         const fileType = fileBlocks[1];
 
         // Import route handler
-        const routeHandler = await import(filePath);
+        const routeHandler = await import(`file:///${filePath}`);
 
         debug(`Registering ${fileType.toUpperCase()} ${routePath} `);
 
@@ -67,9 +67,9 @@ const fileRoutes = async (dir, app, gql) => {
         } else if (fileType === "get" || fileType === "js") {
           app.get(apiPath, routeHandler.default);
         } else if (fileType === "post") {
-          app.post(apiPath, routeHandler.default);
+          
         } else if (fileType === "gql" && gql) {
-          const { typeDefs, resolvers } = await import(filePath);
+          const { typeDefs, resolvers } = await import(`file:///${filePath}`);
           const schema = makeExecutableSchema({ typeDefs, resolvers });
           schemas.push(schema);
         }

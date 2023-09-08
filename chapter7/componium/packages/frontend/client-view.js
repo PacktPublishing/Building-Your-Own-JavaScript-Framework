@@ -45,7 +45,7 @@ class ClientView {
     // Dynamically importing the component using the provided name from the views directory.
     const viewPath = path.join(cwd(), "/views/", `${this.name}.js`);
     debug("Creating view path:", viewPath);
-    const component = await import(viewPath);
+    const component = await import(`file:///${viewPath}`);
 
     // Check if the imported component has a default export and it's a function.
     if (!component.default) {
