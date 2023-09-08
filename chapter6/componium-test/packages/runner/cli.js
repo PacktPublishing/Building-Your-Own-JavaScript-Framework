@@ -35,7 +35,8 @@ async function runner(targetDirectory = ["tests"], environment, options) {
 }
 
 async function getTestFiles(directory) {
-  return glob(path.join(directory, "**/*.js"), { ignore: "node_modules/**" });
+  const globResult = await glob(`${directory}/**/*.js`, { ignore: "node_modules/**" });
+  return globResult;
 }
 
 function createExecutor(environment, testFiles, options) {
