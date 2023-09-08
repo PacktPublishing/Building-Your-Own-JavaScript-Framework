@@ -38,4 +38,3 @@ jobs:
           node-version: ${{ matrix.node-version }}
       # This step runs `npm ci` to install any dependencies listed in your `package.json` file.
       - run: npm ci
-      - run: npm run postinstall
