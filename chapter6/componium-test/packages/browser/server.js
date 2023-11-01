@@ -11,7 +11,15 @@ const __dirname = dirname(__filename);
 // select a random port
 const port = 0;
 
+/**
+ * Componium CLI test server using Node.js HTTP server.
+ */
 class CliServer {
+  /**
+   * Create CLI server instance.
+   *
+   * @param {string[]} testFiles - Test files to serve.
+   */
   constructor(testFiles) {
     this.html = render(testFiles);
     this.server = http.createServer((req, res) => {
@@ -65,11 +73,19 @@ class CliServer {
       res.end();
     });
   }
+  /**
+   * Start listening for HTTP requests.
+   *
+   * @returns {Object} Server address object.
+   */
   async listen() {
     await this.server.listen(port);
     console.log(this.server.address());
     return { port: this.server.address(), server: this.server };
   }
+  /**
+   * Close the server.
+   */
   async close() {
     await this.server.close();
   }

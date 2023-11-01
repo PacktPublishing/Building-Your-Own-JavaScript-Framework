@@ -1,13 +1,28 @@
 import { Worker } from "node:worker_threads";
 import { ComponiumStatus } from "../util/env.js";
 import makeDebug from "debug";
+
+// Debug logger
 const debug = makeDebug("NodeExecutor");
 
+/**
+ * Node.js test executor using worker threads.
+ */
 class NodeExecutor {
+  /**
+   * Create executor instance.
+   *
+   * @param {string[]} targets - Test targets.
+   */
   constructor(targets) {
     this.targets = targets;
     debug("NodeExecutor targets:", targets);
   }
+  /**
+   * Execute tests.
+   *
+   * @returns {Promise<Object>} Test result status.
+   */
   async execute() {
     let testSuites = this.targets.length;
     let failed = false;
@@ -32,6 +47,7 @@ class NodeExecutor {
         workers.push(workerPromise);
       });
 
+      // Wait for all workers to finish
       Promise.allSettled(workers).then(() => {
         if (testSuites === 0) {
           if (failed) {

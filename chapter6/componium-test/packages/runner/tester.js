@@ -2,8 +2,10 @@ import { assert, should, expect } from "../assert/lib.js";
 import { spy, mock, stub, replace, fake, restore } from "../mock/lib.js";
 import { ComponiumStatus, getExitStatus, isBrowser } from "../util/env.js";
 let Emit;
+// Parent port for workers
 let parentPort;
 
+// Suite methods to filter
 const INTERNAL_SUITE_METHODS = [
   "describe",
   "before",
@@ -12,6 +14,7 @@ const INTERNAL_SUITE_METHODS = [
   "after",
 ];
 
+// Get emitter based on environment
 if (isBrowser()) {
   Emit = await import("../browser/emit.js");
 } else {
@@ -22,7 +25,9 @@ if (isBrowser()) {
 
 let testSuites = 0;
 let totalTestsFailed = 0;
+// Global emitter
 let globalEmitter = new Emit.default();
+// Handle test run completion
 globalEmitter.on("suitesDone", (report) => {
   let result = ComponiumStatus.Pass;
   if (report.totalTestsFailed > 0) {
@@ -40,6 +45,9 @@ globalEmitter.on("suitesDone", (report) => {
   }
 });
 
+/**
+ * Componium test runner class.
+ */
 class ComponiumTest {
   constructor() {
     this.emitter = new Emit.default();
