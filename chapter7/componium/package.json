@@ -35,9 +35,9 @@
     "lit": "^2.7.5",
     "lit-html": "^2.7.4",
     "sequelize": "^6.32.1",
+    "sqlite3": "^5.1.6",
     "winston": "^3.9.0",
-    "yargs": "^17.7.2",
-    "sqlite3": "^5.1.6"
+    "yargs": "^17.7.2"
   },
   "license": "MIT",
   "devDependencies": {
