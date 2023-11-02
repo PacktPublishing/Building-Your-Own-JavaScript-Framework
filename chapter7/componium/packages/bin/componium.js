@@ -18,7 +18,12 @@ yargs(process.argv.slice(2))
   .usage("$0 <cmd> [args]") // Display usage string in help output
 
   // Init
-  .command("init", "initialize a new Componium app ", () => {}, initDev)
+  .command(
+    "init",
+    "initialize a new Componium app ",
+    () => {},
+    () => initDev()
+  )
   // Command to watch for server changes and restart
   .command("dev", "watch for server changes and restart", () => {}, restartDev)
 

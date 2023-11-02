@@ -2,3 +2,4 @@ combined.log
 error.log
 node_modules
 .componium
+tests/packages/dev/_tmp
