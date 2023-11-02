@@ -1,7 +1,7 @@
 import chokidar from "chokidar";
 import { spawn } from "node:child_process";
 import initDev from "./init-dev.js";
-import create from "./init-dev.js";
+import create from "./create.js";
 // `makeDebug` is a function from the "debug" package for creating a debugger instance.
 import makeDebug from "debug";
 

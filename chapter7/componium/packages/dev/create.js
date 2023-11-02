@@ -5,7 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 /**
  * Interactively allows the user to choose a scaffold type and
@@ -71,6 +71,7 @@ export default async function create() {
 
   const destPath = path.resolve(path.join(destDir, `${toSnakeCase(name)}.js`));
   await fs.copyFile(sourcePath, destPath);
+  console.log(`Created ${destPath}!`);
 }
 
 function toSnakeCase(str) {
