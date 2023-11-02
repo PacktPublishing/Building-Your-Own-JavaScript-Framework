@@ -1,15 +1,33 @@
-# ct // Componium - JavaScript full-stack framework
+# Componium - JavaScript full-stack framework
 
-> ct (componium) is a simple JavaScript testing full-stack framework
+> `componium` is a simple JavaScript full-stack framework
+
+## Getting Started
+
+### Install the framework
+
+```
+npm i -g componium
+```
+
+### Create a new project
+
+In a project directory, execute the following:
+
+```
+componium init
+```
+
+After the project is initialized, run `componium dev` to start the new app or `componium create` to scaffold!
 
 ## Features
 
 ### Server
 
-* File-based and dynamic URL handling
-* GraphQL API server support
-* Ability to start multiple servers within the same context
-* Event API integrated with API routes.
+- File-based and dynamic URL handling
+- GraphQL API server support
+- Ability to start multiple servers within the same context
+- Event API integrated with API routes.
 
 ## Docs
 
@@ -42,10 +60,10 @@ const server = await app.createServer({
 
 Options:
 
-* `name`: Name of the server.
-* `routesRootDir`: The directory containing route definitions.
-* `port`: The port on which the server will listen.
-* `gql`: A boolean value to indicate if GraphQL is enabled.
+- `name`: Name of the server.
+- `routesRootDir`: The directory containing route definitions.
+- `port`: The port on which the server will listen.
+- `gql`: A boolean value to indicate if GraphQL is enabled.
 
 ## Middleware
 
@@ -53,9 +71,8 @@ Options:
 
 Parameters:
 
-* `name`: A unique name for the middleware.
-* `callback`: A function to be executed as middleware.
-
+- `name`: A unique name for the middleware.
+- `callback`: A function to be executed as middleware.
 
 ## Routing
 
@@ -63,9 +80,8 @@ Parameters:
 
 Parameters:
 
-* `path`: The URL path for the route.
-* `callback`: A function handling the request-response for this route.
-
+- `path`: The URL path for the route.
+- `callback`: A function handling the request-response for this route.
 
 `router.addMiddleware(name, callback)`
 
@@ -77,9 +93,9 @@ Client Views create front-end application endpoints to server HTML, CSS, and Jav
 
 Parameters:
 
-* `path`: The URL path where the view will be accessible.
-* `viewName`: The name of the view, presumably used to locate the view template or component.
-* `config`: A configuration object with view-specific options.
+- `path`: The URL path where the view will be accessible.
+- `viewName`: The name of the view, presumably used to locate the view template or component.
+- `config`: A configuration object with view-specific options.
 
 ## License
 
