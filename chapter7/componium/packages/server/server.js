@@ -93,6 +93,35 @@ class Server {
       ],
       "/_framework/directive.js": ["lit-html", "directive.js"],
       "/_framework/directive-helpers.js": ["lit-html", "directive-helpers.js"],
+      "/_framework/template-shadowroot.js": [
+        "@webcomponents",
+        "template-shadowroot",
+        "template-shadowroot.js",
+      ],
+      "/_framework/_implementation/feature_detect.js": [
+        "@webcomponents",
+        "template-shadowroot",
+        "_implementation",
+        "feature_detect.js",
+      ],
+      "/_framework/_implementation/default_implementation.js": [
+        "@webcomponents",
+        "template-shadowroot",
+        "_implementation",
+        "default_implementation.js",
+      ],
+      "/_framework/_implementation/manual_walk.js": [
+        "@webcomponents",
+        "template-shadowroot",
+        "_implementation",
+        "manual_walk.js",
+      ],
+      "/_framework/_implementation/util.js": [
+        "@webcomponents",
+        "template-shadowroot",
+        "_implementation",
+        "util.js",
+      ],
     };
 
     for (let [route, segments] of Object.entries(frameworkPaths)) {
@@ -176,6 +205,16 @@ class Server {
     const newRouter = new Router();
     this.app.use(route, newRouter.router);
     return newRouter;
+  }
+
+  /**
+   * Registers a static directory handler.
+   *
+   * @param {string} path - Route path
+   * @param {function} directory - Route directory to serve files from
+   */
+  addStaticDirectory(path, directory) {
+    this.app.use(path, express.static(directory));
   }
 }
 

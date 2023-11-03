@@ -59,6 +59,12 @@ class Renderer {
           }
         </style>
         <body dsd-pending>
+          <script>
+            if (HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot")) {
+              // Declarative Shadow DOM version
+              document.body.removeAttribute("dsd-pending");
+            }
+          </script>
           <script type="importmap">
             {
               "imports": {
@@ -75,18 +81,26 @@ class Renderer {
               }
             }
           </script>
-          <script>
-            // Check for native declarative shadow DOM support.
-            // If supported, reveal the body content immediately.
-            if (HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot")) {
-              document.body.removeAttribute("dsd-pending");
-            }
-          </script>
           ${unsafeHTML(componentRender)}
           <!-- Dynamically render the component -->
           <script type="module">
             // Importing hydration support for lit components.
-            await import("/_framework/lit-element-hydrate-support.js");
+            const litHydrateSupportInstalled = import(
+              "/_framework/lit-element-hydrate-support.js"
+            );
+
+            if (!HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot")) {
+              // Polyfill
+              const { hydrateShadowRoots } = await import(
+                "/_framework/template-shadowroot.js"
+              );
+
+              hydrateShadowRoots(document.body);
+
+              document.body.removeAttribute("dsd-pending");
+            }
+
+            await litHydrateSupportInstalled;
           </script>
 
           ${unsafeHTML(entrypoint)}

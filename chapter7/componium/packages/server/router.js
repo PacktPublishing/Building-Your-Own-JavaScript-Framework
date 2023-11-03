@@ -5,13 +5,11 @@
 import express from "express";
 
 class Router {
-
   /**
    * Constructor - initializes Express router.
    */
   constructor() {
     this.router = express.Router();
-    const router = this.router;
   }
 
   /**
@@ -37,7 +35,6 @@ class Router {
       next();
     });
   }
-
 }
 
 export default Router;

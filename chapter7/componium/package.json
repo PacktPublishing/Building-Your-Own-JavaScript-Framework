@@ -25,6 +25,7 @@
     "@inquirer/select": "^1.2.1",
     "@lit-labs/ssr": "^3.1.2",
     "@lit-labs/ssr-client": "^1.1.1",
+    "@webcomponents/template-shadowroot": "^0.1.0",
     "body-parser": "^1.20.2",
     "chokidar": "^3.5.3",
     "config": "^3.3.9",

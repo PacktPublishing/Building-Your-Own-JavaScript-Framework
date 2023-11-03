@@ -94,8 +94,14 @@ Client Views create front-end application endpoints to server HTML, CSS, and Jav
 Parameters:
 
 - `path`: The URL path where the view will be accessible.
-- `viewName`: The name of the view, presumably used to locate the view template or component.
+- `viewName`: The name of the view, used to locate the view template or component.
 - `config`: A configuration object with view-specific options.
+
+## Static Directories
+
+Adds a new static path to serve static files from a particular directory.
+
+`server.addStaticDirectory(path, directory);`
 
 ## License
 

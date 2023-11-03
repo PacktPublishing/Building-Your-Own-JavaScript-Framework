@@ -13,3 +13,10 @@ const server = await app.createServer({
   routesRootDir: "routes",
   port: 9000,
 });
+
+// Root View
+server.addClientView("/", "componium", {
+  title: "Componium ",
+});
+
+server.addStaticDirectory("/static", "static");
