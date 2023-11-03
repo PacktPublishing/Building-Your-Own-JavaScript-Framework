@@ -91,8 +91,9 @@ class ComponiumTest {
       }, {});
     const testsTotal = Object.keys(tests).length;
     if (suiteObject.hasOwnProperty("describe")) {
-      console.log("SUITE: ", suiteObject.describe);
-      await Promise.resolve();
+      console.log(`\nSUITE: ${suiteObject.describe}`);
+    } else {
+      console.log(`\nSUITE: Unnamed suite`);
     }
     if (suiteObject.hasOwnProperty("before")) {
       await suiteObject.before();

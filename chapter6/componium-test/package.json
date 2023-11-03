@@ -23,13 +23,13 @@
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "chai": "^4.3.7",
+    "chai": "^4.3.10",
     "debug": "^4.3.4",
     "eta": "^2.0.1",
-    "glob": "^10.2.1",
+    "glob": "^10.3.10",
     "puppeteer": "^19.9.1",
-    "sinon": "^15.0.4",
-    "yargs": "^17.7.1"
+    "sinon": "^17.0.1",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@release-it/keep-a-changelog": "^4.0.0",

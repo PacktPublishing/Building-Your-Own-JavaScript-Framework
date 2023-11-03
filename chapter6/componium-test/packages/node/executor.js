@@ -1,6 +1,7 @@
 import { Worker } from "node:worker_threads";
 import { ComponiumStatus } from "../util/env.js";
 import makeDebug from "debug";
+import util from "util";
 
 // Debug logger
 const debug = makeDebug("NodeExecutor");
@@ -18,6 +19,7 @@ class NodeExecutor {
     this.targets = targets;
     debug("NodeExecutor targets:", targets);
   }
+
   /**
    * Execute tests.
    *
@@ -27,28 +29,32 @@ class NodeExecutor {
     let testSuites = this.targets.length;
     let failed = false;
     console.log("Testing in Node.js", process.version);
-    return new Promise(async (resolve) => {
+
+    return new Promise((resolve) => {
       const workers = [];
+
       this.targets.forEach((target) => {
-        // Create the worker.
-        const workerPromise = new Promise((res) => {
-          const worker = new Worker("./" + target);
-          // Listen for messages from the worker and print them.
-          worker.on("message", (msg) => {
-            if (msg === ComponiumStatus.Fail) {
-              failed = true;
-            }
-            if (msg === ComponiumStatus.Pass || msg === ComponiumStatus.Fail) {
-              testSuites--;
-            }
-            res(msg);
-          });
+        // Create the worker
+        const worker = new Worker("./" + target);
+
+        // Listen for messages and wrap console
+        worker.on("message", (msg) => {
+          if (msg === ComponiumStatus.Fail) {
+            failed = true;
+          }
+
+          if (msg === ComponiumStatus.Pass || msg === ComponiumStatus.Fail) {
+            testSuites--;
+          }
         });
-        workers.push(workerPromise);
+
+        workers.push(worker);
       });
 
       // Wait for all workers to finish
-      Promise.allSettled(workers).then(() => {
+      Promise.all(
+        workers.map((w) => new Promise((res) => w.once("exit", res)))
+      ).then(() => {
         if (testSuites === 0) {
           if (failed) {
             return resolve({
